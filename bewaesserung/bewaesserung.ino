@@ -17,9 +17,9 @@
 
 //configuration defines
 #define MIN_TEMPERATURE 5    //minimum temperature allowed (to avoid ice)
-#define EARTHMIN 380         //only water, if value is higher EARTHMIN
+#define EARTHMIN 360         //only water, if value is higher EARTHMIN
 #define MORNING 8            //time in the morning
-#define AFTERNOON 19         //time in the afternoon
+#define AFTERNOON 17         //time in the afternoon (summer time) -> winter 16
 #define WATERRUNTIME 120     // how long eacht water run should be
 
 //object definitions
@@ -66,7 +66,7 @@ void loop() {
   clock.getTime();
 
   //start afternoon water
-  if (clock.hour == AFTERNOON && done == false)
+  if (clock.hour == (int)AFTERNOON && done == false)
   {
     Serial.println("Start water job in the afternoon");
     doWaterJob();
@@ -75,7 +75,7 @@ void loop() {
   }
 
   //start afternoon water
-  else if (clock.hour == MORNING && done == false)
+  else if (clock.hour == (int) MORNING && done == false)
   {
     Serial.println("Start water job in the morning");
     doWaterJob();
@@ -84,7 +84,7 @@ void loop() {
   }
 
   //reset 
-  else if (clock.hour != AFTERNOON && clock.hour != MORNING)
+  else if (clock.hour != (int) AFTERNOON && clock.hour !=(int) MORNING)
   {
     done = false;
   }
